@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>JanCasRob Apartment | Admin Portal</title>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <link rel="stylesheet" href="adminstyle.css">
+
+    <!-- === TAB ICON (FAVICON) - FULL SUPPORT === -->
+   <link rel="icon" type="image/png" href="BlueLogo.ico">
+   <link rel="apple-touch-icon" href="BlueLogo.ico">
+   <link rel="shortcut icon" href="BlueLogo.ico">
+  
+   <!-- External Resources (Ionicons) -->
+   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  
+</head>
+<body>
+
+
+
+<!-- HOVER SLIDING SIDEBAR - expands on hover -->
+<div class="sidebar-slide">
+   <div class="sidebar-brand">
+       <img src="BlueLogo.png" class="sidebar-logo-img" alt="Logo" onerror="this.src='https://placehold.co/70x70/1e3c72/white?text=JR'">
+       <h2>JanCasRob</h2>
+       <p>Admin Portal</p>
+   </div>
+  
+   <ul class="sidebar-menu">
+       <li>
+           <a href="#" class="menu-item active" onclick="return false;" data-tooltip="Home">
+               <i class="fas fa-home"></i>
+               <span>Home</span>
+           </a>
+       </li>
+       <li>
+           <div class="menu-item has-submenu" onclick="toggleSubmenu(this)" data-tooltip="Tenants">
+               <div style="display: flex; align-items: center; gap: 12px;">
+                   <i class="fas fa-users"></i>
+                   <span>Tenants</span>
+               </div>
+               <i class="fas fa-chevron-right arrow"></i>
+           </div>
+           <ul class="sidebar-submenu">
+               <li><a href="#"><i class="fas fa-list"></i> All Tenants</a></li>
+               <li><a href="#"><i class="fas fa-exclamation-circle"></i> Concerns</a></li>
+               <li><a href="#"><i class="fas fa-address-book"></i> Contacts</a></li>
+           </ul>
+       </li>
+       <li>
+           <div class="menu-item has-submenu" onclick="toggleSubmenu(this)" data-tooltip="Contracts">
+               <div style="display: flex; align-items: center; gap: 12px;">
+                   <i class="fas fa-file-contract"></i>
+                   <span>Contracts</span>
+               </div>
+               <i class="fas fa-chevron-right arrow"></i>
+           </div>
+           <ul class="sidebar-submenu">
+               <li><a href="#"><i class="fas fa-plus"></i> New Contract</a></li>
+               <li><a href="#"><i class="fas fa-clock"></i> Expiring Soon</a></li>
+               <li><a href="#"><i class="fas fa-archive"></i> Archived</a></li>
+           </ul>
+       </li>
+       <li>
+           <div class="menu-item has-submenu" onclick="toggleSubmenu(this)" data-tooltip="Reports">
+               <div style="display: flex; align-items: center; gap: 12px;">
+                   <i class="fas fa-chart-line"></i>
+                   <span>Reports</span>
+               </div>
+               <i class="fas fa-chevron-right arrow"></i>
+           </div>
+           <ul class="sidebar-submenu">
+               <li><a href="#"><i class="fas fa-dollar-sign"></i> Revenue Report</a></li>
+               <li><a href="#"><i class="fas fa-tools"></i> Maintenance</a></li>
+               <li><a href="#"><i class="fas fa-chart-pie"></i> Analytics</a></li>
+           </ul>
+       </li>
+       <li>
+           <a href="#" class="menu-item" onclick="return false;" data-tooltip="Notifications">
+               <i class="fas fa-bell"></i>
+               <span>Notifications</span>
+               <span style="margin-left: auto; background: #d00303; padding: 2px 8px; border-radius: 20px; font-size: 0.7rem;">3</span>
+           </a>
+       </li>
+   </ul>
+  
+   <div class="sidebar-footer">
+       <ul class="sidebar-menu">
+           <li>
+               <a href="#" class="menu-item" onclick="return false;" data-tooltip="Settings">
+                   <i class="fas fa-cog"></i>
+                   <span>Settings</span>
+               </a>
+           </li>
+           <li>
+               <a href="#" class="menu-item" onclick="return false;" data-tooltip="Logout">
+                   <i class="fas fa-sign-out-alt"></i>
+                   <span>Logout</span>
+               </a>
+           </li>
+       </ul>
+   </div>
+</div>
+
+
+<!-- YOUR EXISTING DASHBOARD -->
+<div class="dashboard">
+   <!-- HEADER with LOGO and BACKGROUND PHOTO -->
+   <div class="admin-header">
+       <div class="logo-area">
+           <img src="BlueLogo.png" class="custom-logo-img" alt="JanCasRob APARTMENT Logo" onerror="this.src='https://placehold.co/45x45/1e3c72/white?text=JR'">
+           <div class="logo-text">
+               <h1>JanCasRob Apartment</h1>
+               <p>Admin Portal · Central Management</p>
+           </div>
+       </div>
+       <div class="admin-actions">
+           <div class="icon-badge"><i class="far fa-bell"></i><span class="badge-count">3</span></div>
+           <div class="icon-badge"><i class="far fa-envelope"></i><span class="badge-count">2</span></div>
+       </div>
+   </div>
+
+
+   <!-- STATS CARDS -->
+   <div class="stats-grid">
+       <div class="stat-card">
+           <h3><i class="fas fa-file-contract small-icon"></i> Expiring Contracts</h3>
+           <div class="stat-number" id="expiringCount">3</div>
+           <div class="stat-sub">Next 30 days</div>
+       </div>
+       <div class="stat-card">
+           <h3><i class="fas fa-exclamation-triangle small-icon"></i> Open Concerns</h3>
+           <div class="stat-number" id="concernsCount">4</div>
+           <div class="stat-sub">Unresolved tickets</div>
+       </div>
+       <div class="stat-card">
+           <h3><i class="fas fa-dollar-sign small-icon"></i> Monthly Revenue</h3>
+           <div class="revenue-number">₱48,250.00</div>
+           <div class="stat-sub">This month</div>
+       </div>
+   </div>
+
+
+   <!-- AI INSIGHTS + CONTRACTS -->
+   <div class="two-columns">
+       <div class="card">
+           <div class="card-title"><i class="fas fa-robot"></i> All Insights</div>
+           <ul class="insight-list">
+               <li><i class="fas fa-chart-line"></i> Occupancy rate: <strong>94%</strong> — above regional average.</li>
+               <li><i class="fas fa-water"></i> Leaking Pipes Maintenance predicted in Unit 3B. Schedule inspection.</li>
+               <li><i class="fas fa-wrench"></i> <strong>2 Maintenance Issues Detected</strong> (HVAC filter & attic moisture).</li>
+               <li><i class="fas fa-file-signature"></i> <strong>3 Contracts Expiring Next Month</strong> (Renewal alerts active).</li>
+           </ul>
+       </div>
+
+
+       <div class="card">
+           <div class="card-title"><i class="fas fa-file-contract"></i> Contract Management Summary</div>
+           <table class="contract-table">
+               <thead>
+                   <tr><th>Tenant</th><th>Unit</th><th>End Date</th><th>Status</th></tr>
+               </thead>
+               <tbody id="contractTableBody"></tbody>
+           </table>
+           <div class="file-zone">
+               <i class="fas fa-upload"></i> Upload contract
+               <div style="display: flex; gap: 8px; margin-top: 8px;">
+                   <input type="file" id="contractFile" accept=".pdf,.docx" style="font-size:0.7rem;">
+                   <button class="btn-submit" id="uploadBtn">Upload</button>
+               </div>
+           </div>
+       </div>
+   </div>
+
+
+   <!-- TENANTS CONCERNS SECTION -->
+   <div class="card">
+       <div class="flex-between">
+           <div class="card-title"><i class="fas fa-comment-dots"></i> Tenants Concerns</div>
+           <div class="search-bar" style="width: 200px;">
+               <i class="fas fa-search"></i><input type="text" id="searchConcern" placeholder="Search...">
+           </div>
+       </div>
+       <div style="overflow-x: auto;">
+           <table class="concerns-table" style="width:100%;">
+               <thead>
+                   <tr><th>Tenant</th><th>Description</th><th>Status</th><th>Date</th><th>Action</th></tr>
+               </thead>
+               <tbody id="concernsBody"></tbody>
+           </table>
+       </div>
+       <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
+           <input type="text" id="newConcernName" placeholder="Tenant name" style="padding:6px 12px; border-radius:30px; border:1px solid #ccc; font-size:0.7rem; flex:1;">
+           <input type="text" id="newConcernDesc" placeholder="Description" style="padding:6px 12px; border-radius:30px; border:1px solid #ccc; font-size:0.7rem; flex:2;">
+           <button id="addConcernBtn" class="btn-submit">+ Add Concern</button>
+       </div>
+   </div>
+</div>
+
+
+<div id="toastMsg" class="message-toast">✓ Done</div>
+
+
+<script>
+   // Toggle submenu function for sidebar (only works when expanded)
+   function toggleSubmenu(element) {
+       const sidebar = document.querySelector('.sidebar-slide');
+       const isExpanded = sidebar.offsetWidth > 100;
+      
+       if (isExpanded) {
+           element.classList.toggle('active-sub');
+           const submenu = element.nextElementSibling;
+           if (submenu && submenu.classList.contains('sidebar-submenu')) {
+               submenu.classList.toggle('show');
+           }
+       }
+   }
+
+
+   // CONTRACT DATA
+   let contracts = [
+       { tenant: "Norenz Reomales", unit: "A-101", endDate: "2026-05-28", status: "Expiring Soon" },
+       { tenant: "Noime Jabanag", unit: "B-204", endDate: "2026-06-12", status: "Active" },
+       { tenant: "Neo Rillera", unit: "C-307", endDate: "2026-05-30", status: "Expiring Soon" },
+       { tenant: "Neika Aumentado", unit: "A-102", endDate: "2026-07-01", status: "Active" }
+   ];
+
+
+   // CONCERNS DATA
+   let concerns = [
+       { id: 1, name: "Norenz Reomales", description: "Leaking faucet in bathroom", status: "Pending", date: "2026-04-25" },
+       { id: 2, name: "Noime Jabanag", description: "AC not cooling properly", status: "In Progress", date: "2026-04-27" },
+       { id: 3, name: "Neo Rillera", description: "Broken window handle", status: "Pending", date: "2026-04-28" },
+       { id: 4, name: "Neika Aumentado", description: "Water heater malfunction", status: "Pending", date: "2026-04-29" }
+   ];
+
+
+   function formatDate(dateStr) {
+       if (!dateStr) return '';
+       let parts = dateStr.split('-');
+       return `${parts[1]}/${parts[2]}/${parts[0]}`;
+   }
+
+
+   function renderContracts() {
+       const tbody = document.getElementById('contractTableBody');
+       tbody.innerHTML = '';
+       contracts.forEach(c => {
+           const row = tbody.insertRow();
+           const statusClass = c.status === "Expiring Soon" ? "status-badge status-expiring" : "status-badge";
+           row.innerHTML = `
+               <td>${escapeHtml(c.tenant)}</td>
+               <td>${c.unit}</td>
+               <td>${formatDate(c.endDate)}</td>
+               <td><span class="${statusClass}">${c.status}</span></td>
+           `;
+       });
+       const expiringCount = contracts.filter(c => c.status === "Expiring Soon").length;
+       document.getElementById('expiringCount').innerText = expiringCount;
+   }
+
+
+   function renderConcerns(filter = '') {
+       const tbody = document.getElementById('concernsBody');
+       let filtered = concerns.filter(c =>
+           c.name.toLowerCase().includes(filter.toLowerCase()) ||
+           c.description.toLowerCase().includes(filter.toLowerCase())
+       );
+       tbody.innerHTML = '';
+       filtered.forEach(c => {
+           const row = tbody.insertRow();
+           let statusClass = c.status === "Pending" ? "status-badge status-expiring" : "status-badge";
+           row.innerHTML = `
+               <td><strong>${escapeHtml(c.name)}</strong></td>
+               <td>${escapeHtml(c.description)}</td>
+               <td><span class="${statusClass}">${c.status}</span></td>
+               <td>${formatDate(c.date)}</td>
+               <td><button class="resolve-btn" data-id="${c.id}">✓ Resolve</button></td>
+           `;
+       });
+       const openCount = concerns.filter(c => c.status !== "Resolved").length;
+       document.getElementById('concernsCount').innerText = openCount;
+
+
+       document.querySelectorAll('.resolve-btn').forEach(btn => {
+           btn.addEventListener('click', (e) => {
+               const id = parseInt(btn.getAttribute('data-id'));
+               const concern = concerns.find(c => c.id === id);
+               if (concern && concern.status !== 'Resolved') {
+                   concern.status = 'Resolved';
+                   renderConcerns(document.getElementById('searchConcern').value);
+                   showToast(`Concern #${id} resolved`);
+               }
+           });
+       });
+   }
+
+
+   function escapeHtml(str) {
+       if (!str) return '';
+       return str.replace(/[&<>]/g, function(m) {
+           if (m === '&') return '&amp;';
+           if (m === '<') return '&lt;';
+           if (m === '>') return '&gt;';
+           return m;
+       });
+   }
+
+
+   function showToast(msg) {
+       const toast = document.getElementById('toastMsg');
+       toast.innerText = msg;
+       toast.style.display = 'block';
+       setTimeout(() => toast.style.display = 'none', 2000);
+   }
+
+
+   document.getElementById('searchConcern').addEventListener('input', (e) => {
+       renderConcerns(e.target.value);
+   });
+
+
+   document.getElementById('addConcernBtn').addEventListener('click', () => {
+       const name = document.getElementById('newConcernName').value.trim();
+       const desc = document.getElementById('newConcernDesc').value.trim();
+       if (!name || !desc) {
+           showToast("Please enter tenant name and description");
+           return;
+       }
+       const newId = Math.max(...concerns.map(c => c.id), 0) + 1;
+       concerns.push({
+           id: newId,
+           name: name,
+           description: desc,
+           status: "Pending",
+           date: new Date().toISOString().slice(0,10)
+       });
+       document.getElementById('newConcernName').value = '';
+       document.getElementById('newConcernDesc').value = '';
+       renderConcerns(document.getElementById('searchConcern').value);
+       showToast("Concern added");
+   });
+
+
+   document.getElementById('uploadBtn').addEventListener('click', () => {
+       const fileInput = document.getElementById('contractFile');
+       if (fileInput.files.length === 0) {
+           showToast("Select a file first");
+           return;
+       }
+       showToast(`📄 ${fileInput.files[0].name} uploaded`);
+       fileInput.value = '';
+   });
+
+
+   renderContracts();
+   renderConcerns('');
+</script>
+</body>
+</html>
+
+
+
