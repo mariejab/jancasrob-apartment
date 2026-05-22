@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <input type="text" id="myInput" placeholder="Enter text">
+    <button onclick="handleClick()">Click</button>
+    <pre id="output"></pre>
+
+    <script>
+      let message = "hello";
+      const name = "world";
+
+      function greet() {
+        return message + " " + name;
+      }
+
+      function getValue() {
+        return document.getElementById("myInput").value;
+      }
+
+      function handleClick() {
+        const greeting = greet();
+        const val = getValue();
+        document.getElementById("output").textContent = greeting + "\n" + val;
+      }
+    </script>
+  </body>
+</html>
